@@ -3,10 +3,12 @@
 import discord
 import discord.ext.tasks as tasks
 import logging
+import dotenv
 
 #Intents for bot
 intents = discord.Intents.all()
 intents.message_content = True
+
 
 #Bot class
 class Maximon(discord.Client):
@@ -31,4 +33,4 @@ class Maximon(discord.Client):
 
 #Preparing client to run
 client = Maximon(intents=intents)
-client.run('MTIwMzcyNzA1NTAwNzUxNDYzNA.G-zEUn.7sZARtd18HMQ0gXmLaDVP4mQvbDsto5-rVKzpc')
+client.run('')
