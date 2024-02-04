@@ -26,11 +26,6 @@ class Maximon(discord.Client):
     async def on_message(message):
         if message.author == maxi.user:
             return
-    
-    status = (['Python','Git','Github','VSCode','Windows','Discord.py'])
-    @tasks.loop(seconds=30)
-    async def status_swap():
-        await maxi.change_presence(activity=discord.Game(next(status)))
         
 
 #Preparing client to run
