@@ -3,12 +3,14 @@
 import discord
 import discord.ext.tasks as tasks
 import logging
-import dotenv
+from dotenv import load_dotenv
+import os
 
 #Intents for bot
 intents = discord.Intents.all()
 intents.message_content = True
 
+load_dotenv('token.env')
 
 #Bot class
 class Maximon(discord.Client):
@@ -33,4 +35,4 @@ class Maximon(discord.Client):
 
 #Preparing client to run
 client = Maximon(intents=intents)
-client.run('')
+client.run(os.getenv("DISCORD_TOKEN"))
