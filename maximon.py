@@ -1,9 +1,10 @@
 
 #importing modules
 import discord
-import discord.ext.tasks as tasks
+from discord.ext import tasks, commands
 import logging
 from dotenv import load_dotenv
+from itertools import cycle
 import os
 
 #Intents for bot
@@ -12,22 +13,24 @@ intents.message_content = True
 
 load_dotenv('token.env')
 
+maxi = discord.ext.commands.Bot(command_prefix='&', intents=intents)
+
+status=cycle(["Git","Github","Discord","Discord.py","Python"])
+
+@tasks.loop(seconds=60)
+async def status_swap():
+    await maxi.change_presence(activity=discord.Game(next(status)))
 #Bot class
-class Maximon(discord.Client):
-    maxi = discord.Client(intents=intents)
+@maxi.event
+async def on_ready():
+        print(f'{maxi.user} is online!')
+        status_swap.start()
     
-    #Logging bot in
-    @maxi.event
-    async def on_ready(self):
-        print(f'{self.user} is online!')
-    
-    #Resolving self replies
-    @maxi.event
-    async def on_message(message):
+#Resolving self replies
+@maxi.event
+async def on_message(message):
         if message.author == maxi.user:
             return
-        
 
 #Preparing client to run
-client = Maximon(intents=intents)
-client.run(os.getenv("DISCORD_TOKEN"))
+maxi.run(os.getenv("DISCORD_TOKEN"))
