@@ -2,7 +2,6 @@
 #importing modules
 import discord
 from discord.ext import tasks, commands
-import logging
 from dotenv import load_dotenv
 from itertools import cycle
 import os
